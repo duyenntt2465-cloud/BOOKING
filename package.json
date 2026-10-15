@@ -1,0 +1,8 @@
+{
+  "name": "duyen-deal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website tiếp nhận yêu cầu vé phim, voucher và Shopee Deal",
+  "scripts": {"dev": "netlify dev"},
+  "dependencies": {}
+}

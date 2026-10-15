@@ -1,0 +1,16 @@
+const buttons=[...document.querySelectorAll("[data-service]")], type=document.getElementById("serviceType"), title=document.getElementById("formTitle"), desc=document.getElementById("formDesc"), form=document.getElementById("orderForm"), result=document.getElementById("result");
+const config={movie:{title:"Đặt vé xem phim",desc:"Cho Duyên biết lịch xem mong muốn để kiểm tra giá và ghế còn phù hợp.",fields:"movieFields"},drink:{title:"Tìm voucher đồ uống",desc:"Chọn thương hiệu và loại ưu đãi bạn đang tìm.",fields:"drinkFields"},shopee:{title:"Gửi yêu cầu book Shopee",desc:"Gửi link sản phẩm và lựa chọn mong muốn. Không gửi mật khẩu hoặc OTP.",fields:"shopeeFields"}};
+function setService(s){type.value=s;buttons.forEach(b=>b.classList.toggle("active",b.dataset.service===s));Object.keys(config).forEach(k=>document.getElementById(config[k].fields).classList.toggle("hidden",k!==s));title.textContent=config[s].title;desc.textContent=config[s].desc;result.classList.remove("show");}
+buttons.forEach(b=>b.addEventListener("click",()=>setService(b.dataset.service)));
+const today=new Date();document.querySelector('[name="date"]').min=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+function val(name){const e=form.elements[name];return e?String(e.value||"").trim():"";}
+function activeFields(){return [...document.querySelectorAll(".fields:not(.hidden) input,.fields:not(.hidden) select,.fields:not(.hidden) textarea")];}
+form.addEventListener("submit",async e=>{e.preventDefault();result.classList.remove("show");const s=type.value;const payload={service:s};
+const names={movie:["cinema","branch","movie","date","time","quantity","seats","notes"],drink:["brand","drinkDeal","drinkQty","budget","drinkNotes"],shopee:["productUrl","productName","variant","productQty","voucher","shopNotes"]};
+for(const n of names[s]) payload[n]=val(n);
+const missing=activeFields().filter(el=>el.required&&!el.value.trim());if(missing.length){missing[0].focus();return;}
+if(s==="shopee"&&payload.productUrl){try{const u=new URL(payload.productUrl);if(!["shopee.vn","www.shopee.vn"].includes(u.hostname)){alert("Vui lòng nhập đường dẫn Shopee Việt Nam hợp lệ.");return;}}catch{alert("Link sản phẩm chưa hợp lệ.");return;}}
+const btn=form.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent="Đang gửi yêu cầu…";
+try{const r=await fetch("/.netlify/functions/submit-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const data=await r.json();if(!r.ok)throw new Error(data.error||"Chưa gửi được yêu cầu.");result.innerHTML=`<b>Đã tiếp nhận yêu cầu: ${escapeHtml(data.orderId)}</b><br>Hãy lưu mã này để đối chiếu khi liên hệ Duyên. Đây chưa phải xác nhận đặt vé/đặt hàng thành công.`;result.classList.add("show");form.reset();setService(s);result.classList.add("show");result.scrollIntoView({behavior:"smooth",block:"center"});}catch(err){result.textContent=err.message+" Vui lòng thử lại sau.";result.classList.add("show");result.style.background="#fff0f0";result.style.color="#8b2e35";}finally{btn.disabled=false;btn.innerHTML='Gửi yêu cầu cho Duyên <span>→</span>';}}
+);
+function escapeHtml(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}

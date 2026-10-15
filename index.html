@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duyên Deal – Vé phim & Voucher giá tốt</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="#"><span class="logo">DD</span><span><b>Duyên Deal</b><small>VÉ PHIM · VOUCHER · SHOPEE DEAL</small></span></a><a class="pill" href="#dat-dich-vu">Gửi yêu cầu ↗</a></header>
+<main>
+<section class="hero"><div class="hero-copy"><span class="eyebrow">DEAL XINH MỖI NGÀY</span><h1>Đi chơi vui,<br><em>chi tiêu nhẹ ví.</em></h1><p>Đặt vé xem phim, săn voucher đồ uống và gửi yêu cầu book đơn Shopee ngay trên một trang.</p><a class="button" href="#dat-dich-vu">Chọn dịch vụ của bạn <span>→</span></a><div class="trust">♡ Không cần tài khoản · Không bắt buộc SĐT/email</div></div><div class="hero-art"><div class="ticket"><span>YOUR NEXT MOVIE NIGHT</span><div class="popcorn">🍿</div><strong>GOOD<br>VIBES</strong><small>VÉ PHIM & DEAL TỐT</small><div class="ticket-bottom">DUYEN DEAL <span>✦ ✦ ✦</span></div></div><div class="sticker">deal<br>hời ♡</div></div></section>
+<section class="services"><div class="section-head"><div><span class="eyebrow">CHỌN DỊCH VỤ</span><h2>Hôm nay mình giúp gì cho bạn?</h2></div><p>Điền form, kiểm tra lại thông tin rồi gửi nhé.</p></div><div class="service-grid"><button class="service active" data-service="movie"><span class="service-icon">🎬</span><b>Vé xem phim</b><small>Rạp · phim · suất chiếu</small><span class="arrow">↗</span></button><button class="service" data-service="drink"><span class="service-icon">🧋</span><b>Voucher đồ uống</b><small>Highlands · Phúc Long · Katinat</small><span class="arrow">↗</span></button><button class="service" data-service="shopee"><span class="service-icon">🛍️</span><b>Book đơn Shopee</b><small>Link sản phẩm · số lượng</small><span class="arrow">↗</span></button></div></section>
+<section class="booking" id="dat-dich-vu"><div class="form-intro"><span class="eyebrow">FORM YÊU CẦU</span><h2 id="formTitle">Đặt vé xem phim</h2><p id="formDesc">Cho Duyên biết lịch xem mong muốn để kiểm tra giá và ghế còn phù hợp.</p><div class="privacy"><span>🔒</span><div><b>Riêng tư ngay từ đầu</b><small>Không yêu cầu tên, số điện thoại hoặc email. Chỉ gửi thông tin cần để xử lý yêu cầu.</small></div></div><div class="steps"><span>01 <small>Điền thông tin</small></span><span>02 <small>Kiểm tra yêu cầu</small></span><span>03 <small>Duyên phản hồi</small></span></div></div>
+<form id="orderForm" class="form">
+<input type="hidden" id="serviceType" value="movie">
+<div id="movieFields" class="fields">
+<label>Tên rạp<select name="cinema" required><option value="">Chọn rạp</option><option>CGV</option><option>Lotte Cinema</option><option>Galaxy Cinema</option><option>Beta</option><option>Cinestar</option><option>BHD</option><option>Mega GS</option><option>Rạp Quốc Gia</option><option>Khác</option></select></label>
+<label>Chi nhánh / khu vực<input name="branch" placeholder="VD: CGV Giga Mall" required></label>
+<label class="wide">Tên phim<input name="movie" placeholder="Nhập tên phim" required></label>
+<label>Ngày xem<input type="date" name="date" required></label><label>Suất chiếu mong muốn<input type="time" name="time" required></label>
+<label>Số lượng vé<select name="quantity" required><option value="1">1 vé</option><option value="2" selected>2 vé</option><option value="3">3 vé</option><option value="4">4 vé</option><option value="5">5 vé</option><option value="6+">Trên 5 vé</option></select></label>
+<label>Ghế mong muốn<select name="seats"><option>Giữa rạp</option><option>Hàng sau</option><option>Gần lối đi</option><option>Không yêu cầu</option></select></label>
+<label class="wide">Combo / ghi chú<textarea name="notes" rows="3" placeholder="Combo bắp nước, yêu cầu ghế hoặc thông tin khác (không nhập dữ liệu nhạy cảm)"></textarea></label>
+</div>
+<div id="drinkFields" class="fields hidden">
+<label>Thương hiệu<select name="brand"><option value="">Chọn thương hiệu</option><option>Highlands Coffee</option><option>Phúc Long</option><option>Katinat</option><option>Khác</option></select></label>
+<label>Loại ưu đãi<input name="drinkDeal" placeholder="VD: voucher nước / combo"></label>
+<label>Số lượng<select name="drinkQty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></label>
+<label>Ngân sách mong muốn (đ)<input name="budget" type="number" min="0" placeholder="Không bắt buộc"></label>
+<label class="wide">Ghi chú<textarea name="drinkNotes" rows="3" placeholder="Ưu đãi mong muốn, điều kiện cần lưu ý"></textarea></label>
+</div>
+<div id="shopeeFields" class="fields hidden">
+<label class="wide">Link sản phẩm Shopee<input name="productUrl" type="url" placeholder="https://shopee.vn/..." ></label>
+<label class="wide">Tên sản phẩm<input name="productName" placeholder="Tên sản phẩm"></label>
+<label>Phân loại / màu / size<input name="variant" placeholder="VD: màu đen, size M"></label>
+<label>Số lượng<select name="productQty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></label>
+<label class="wide">Voucher muốn áp dụng<input name="voucher" placeholder="VD: voucher giảm 50k (nếu có)"></label>
+<label class="wide">Ghi chú<textarea name="shopNotes" rows="3" placeholder="Yêu cầu khác"></textarea></label>
+<div class="fee-note wide">Phí công tham khảo: 35.000–52.000đ/đơn. Voucher và mức giảm phụ thuộc điều kiện thực tế, không đảm bảo mọi đơn có giá 0đ.</div>
+</div>
+<div class="wide consent"><label class="check"><input type="checkbox" id="confirm" required> Tôi xác nhận thông tin yêu cầu đã đúng và hiểu đây chưa phải xác nhận đặt vé/đặt hàng thành công.</label></div>
+<div class="wide"><button class="button submit" type="submit">Gửi yêu cầu cho Duyên <span>→</span></button><p class="form-note">Không gửi mật khẩu, mã OTP, thông tin thanh toán hoặc dữ liệu cá nhân nhạy cảm.</p></div>
+<div id="result" class="result wide" aria-live="polite"></div>
+</form></section>
+<section class="rules"><div><span class="eyebrow">NỘI QUY NHỎ</span><h2>Để săn deal vui vẻ hơn ♡</h2></div><div class="rule-list"><p><b>01</b> Website dùng để gửi yêu cầu vé phim, voucher và hỗ trợ book đơn.</p><p><b>02</b> Giá vé, ghế và ưu đãi cần được kiểm tra lại trước khi xác nhận.</p><p><b>03</b> Voucher có số lượng và điều kiện riêng; không đảm bảo luôn còn mã giảm giá.</p><p><b>04</b> Đơn Shopee do khách tự kiểm tra và tuân thủ điều khoản nền tảng; không gửi mật khẩu/OTP.</p></div></section>
+</main><footer><a class="brand" href="#"><span class="logo">DD</span><b>Duyên Deal</b></a><span>Deal tốt mỗi ngày, vui hơn mỗi chuyến đi ♡</span></footer>
+<script src="/app.js"></script>
+</body></html>
